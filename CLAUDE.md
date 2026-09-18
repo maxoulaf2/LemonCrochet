@@ -138,13 +138,7 @@ Tests du solveur : comparer des mesures robustes (rayon max, hauteur totale, vol
 
 ## Feuille de route
 
-- [ ] **V0** : DSL (CM, ms, aug, dim, répétitions, comptes), validation, profil analytique, surface de révolution dans le front
-- [ ] **V1** : graphe de mailles complet, XPBD avec rembourrage, couleurs
-- [ ] **V2** : BLO/FLO, départ en ovale sur chaînette, rangs aller-retour, fermeture
-- [ ] **V3** : pièces multiples et assemblage (DSL + placement interactif)
-- [ ] **V4** : import de patrons libres via LLM (vers le DSL), mode « pas à pas », export
-
-Travailler dans l'ordre. Ne pas anticiper une fonctionnalité d'une version ultérieure sans le demander.
+Voir ROADMAP.md ; ne pas anticiper une épique ultérieure sans le demander.
 
 ## Façon de travailler
 
