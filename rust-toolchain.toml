@@ -1,0 +1,5 @@
+# Pins the Rust toolchain for everyone: rustup reads this file automatically
+# (locally and in CI), much like global.json pins the .NET SDK.
+[toolchain]
+channel = "1.98.1"
+components = ["rustfmt", "clippy"]
