@@ -55,7 +55,7 @@ Avant de considérer une tâche terminée : `fmt`, `clippy` sans warning et `tes
 
 ## Conventions
 
-- Code, identifiants, commentaires et messages de commit en **anglais**. Documentation utilisateur et messages d'erreur du DSL en **français** d'abord (i18n prévue plus tard).
+- Code, identifiants et commentaires en **anglais**. Messages de commit en **français** (préfixe de type en anglais : `feat(dsl): E1.3 répétitions imbriquées`). Documentation utilisateur et messages d'erreur du DSL en **français** d'abord (i18n prévue plus tard).
 - Rust édition 2024 (resolver 3), déclarée une seule fois dans `[workspace.package]` et héritée par chaque crate. `glam` pour les vecteurs (f32), `serde` pour la sérialisation, `thiserror` pour les erreurs.
 - **Pas de `panic!`, `unwrap()` ni `expect()` dans le code de bibliothèque.** Un panic en WASM tue l'onglet. Autorisés uniquement dans les tests et la CLI.
 - Toute erreur du DSL porte un `Span` (offset de début et de fin dans le texte source) pour être affichée dans l'éditeur.

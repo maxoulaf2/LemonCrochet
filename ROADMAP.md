@@ -2,7 +2,7 @@
 
 Feuille de route du visualiseur 3D de patrons d'amigurumi.
 
-Organisation : **phases** (jalons démontrables) → **épiques** (`E1`) → **fonctionnalités** (`E1.2`). Chaque fonctionnalité donne en général 1 à 3 user stories. Les identifiants sont stables : les US, branches et commits y font référence (`feat(dsl): E1.3 nested repeats`).
+Organisation : **phases** (jalons démontrables) → **épiques** (`E1`) → **fonctionnalités** (`E1.2`). Chaque fonctionnalité donne en général 1 à 3 user stories. Les identifiants sont stables : les US, branches et commits y font référence (`feat(dsl): E1.3 répétitions imbriquées`).
 
 Statut : `[ ]` à faire · `[~]` en cours · `[x]` terminé
 
