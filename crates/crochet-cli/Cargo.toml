@@ -1,0 +1,10 @@
+[package]
+name = "crochet-cli"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+crochet-solver = { path = "../crochet-solver" }
+crochet-dsl = { path = "../crochet-dsl" }
+crochet-mesh = { path = "../crochet-mesh" }
+crochet-topology = { path = "../crochet-topology" }

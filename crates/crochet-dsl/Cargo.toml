@@ -1,0 +1,7 @@
+[package]
+name = "crochet-dsl"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+

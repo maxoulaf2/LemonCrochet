@@ -1,0 +1,7 @@
+[package]
+name = "crochet-topology"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+crochet-dsl = { path = "../crochet-dsl" }
