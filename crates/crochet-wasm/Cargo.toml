@@ -1,0 +1,7 @@
+[package]
+name = "crochet-wasm"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+crochet-mesh = { path = "../crochet-mesh" }
