@@ -29,6 +29,7 @@ docs/
   dsl.md              Spécification de référence du DSL
   model.md            Modèle physique (contraintes, paramètres, unités)
 examples/             Patrons d'exemple (.crochet) servant aussi de fixtures de test
+UserStories/          US par fonctionnalité : Phase <n>/E<x>/<y>/US-*.md (voir « Façon de travailler »)
 ```
 
 Dépendances entre crates : `dsl` → `topology` → `solver` → `mesh` → `wasm`. Aucune dépendance dans l'autre sens. `crochet-dsl` ne connaît rien à la géométrie.
@@ -142,6 +143,11 @@ Voir ROADMAP.md ; ne pas anticiper une épique ultérieure sans le demander.
 
 ## Façon de travailler
 
+- **Avant de commencer une fonctionnalité de la ROADMAP, rédiger ses user stories** et les faire relire avant tout code :
+  - Emplacement : `UserStories/Phase <n>/E<x>/<y>/` pour la fonctionnalité `E<x>.<y>` (ex. `UserStories/Phase 0/E0/2/` pour E0.2 ; les spikes suivent le même schéma : `UserStories/Phase 0/S1/1/`).
+  - Un fichier Markdown par US : `US-E<x>.<y>-<k>-<slug>.md` (`k` = 1, 2, 3… ; en général 1 à 3 US par fonctionnalité).
+  - Format : modèle et personas de la section « Rédiger les user stories » de `ROADMAP.md` (story utilisateur ou enabler technique, critères Étant donné / Quand / Alors, fixture, hors périmètre, dépendances).
+  - Passer la case de la fonctionnalité à `[~]` dans `ROADMAP.md` au démarrage.
 - Pour toute modification touchant plusieurs crates, proposer un plan avant d'écrire le code.
 - Pour le DSL : écrire d'abord le test (snapshot `insta` de l'AST ou du diagnostic attendu), puis l'implémentation.
 - Ajouter tout nouveau patron d'exemple dans `examples/` : il devient automatiquement un test de non-régression (parse + validation + invariants).
