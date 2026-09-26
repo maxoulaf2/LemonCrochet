@@ -40,8 +40,22 @@ jobs:
   wasm:
     name: wasm
     runs-on: ubuntu-latest
+    # Exposed to downstream jobs as needs.wasm.outputs.has_front.
+    outputs:
+      has_front: ${{ steps.detect.outputs.has_front }}
     steps:
       - uses: actions/checkout@v5
+
+      # hashFiles() is not available in a job-level `if:`, so the check is done
+      # here, after checkout, and passed on as a job output.
+      - name: Detect front
+        id: detect
+        run: |
+          if [ -f web/package.json ]; then
+            echo "has_front=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_front=false" >> "$GITHUB_OUTPUT"
+          fi
 
       # Also installs the wasm32-unknown-unknown target listed in rust-toolchain.toml.
       - name: Install toolchain
@@ -61,3 +75,53 @@ jobs:
         run: |
           test -f web/src/wasm/crochet_wasm_bg.wasm
           test -f web/src/wasm/crochet_wasm.js
+
+      # Hands the generated module to the `front` job (jobs don't share a filesystem).
+      - name: Upload module
+        uses: actions/upload-artifact@v4
+        with:
+          name: crochet-wasm
+          path: web/src/wasm
+          if-no-files-found: error
+          retention-days: 1
+
+  front:
+    name: front
+    needs: wasm
+    # Skipped (not failed) while the front does not exist yet (E0.3).
+    if: needs.wasm.outputs.has_front == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v5
+
+      # web/src/wasm is git-ignored: restore it from the `wasm` job.
+      - name: Download module
+        uses: actions/download-artifact@v4
+        with:
+          name: crochet-wasm
+          path: web/src/wasm
+
+      # No version given: uses the `packageManager` field of web/package.json.
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+
+      # Node version pinned by web/.nvmrc; caches the pnpm store, keyed on the lockfile.
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: web/.nvmrc
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      # --frozen-lockfile: fail instead of silently updating an out-of-sync lockfile.
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
