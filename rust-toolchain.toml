@@ -3,3 +3,5 @@
 [toolchain]
 channel = "1.98.1"
 components = ["rustfmt", "clippy"]
+# Compilation target for the browser (WebAssembly without an OS underneath).
+targets = ["wasm32-unknown-unknown"]
