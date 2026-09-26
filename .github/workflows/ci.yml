@@ -36,3 +36,28 @@ jobs:
 
       - name: Test
         run: cargo test --workspace
+
+  wasm:
+    name: wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # Also installs the wasm32-unknown-unknown target listed in rust-toolchain.toml.
+      - name: Install toolchain
+        run: rustup toolchain install
+
+      - uses: Swatinem/rust-cache@v2
+
+      # Prebuilt wasm-pack binary (much faster than `cargo install wasm-pack`).
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
+
+      - name: Build
+        run: wasm-pack build crates/crochet-wasm --target web --out-dir ../../web/src/wasm
+
+      - name: Check output
+        run: |
+          test -f web/src/wasm/crochet_wasm_bg.wasm
+          test -f web/src/wasm/crochet_wasm.js
