@@ -29,6 +29,7 @@ docs/
   dsl.md              Spécification de référence du DSL
   model.md            Modèle physique (contraintes, paramètres, unités)
 examples/             Patrons d'exemple (.crochet) servant aussi de fixtures de test
+UserStories/          US par fonctionnalité : Phase <n>/E<x>/<y>/US-*.md (voir « Façon de travailler »)
 ```
 
 Dépendances entre crates : `dsl` → `topology` → `solver` → `mesh` → `wasm`. Aucune dépendance dans l'autre sens. `crochet-dsl` ne connaît rien à la géométrie.
@@ -54,7 +55,7 @@ Avant de considérer une tâche terminée : `fmt`, `clippy` sans warning et `tes
 
 ## Conventions
 
-- Code, identifiants, commentaires et messages de commit en **anglais**. Documentation utilisateur et messages d'erreur du DSL en **français** d'abord (i18n prévue plus tard).
+- Code, identifiants et commentaires en **anglais**. Messages de commit en **français** (préfixe de type en anglais : `feat(dsl): E1.3 répétitions imbriquées`). Documentation utilisateur et messages d'erreur du DSL en **français** d'abord (i18n prévue plus tard).
 - Rust édition 2024 (resolver 3), déclarée une seule fois dans `[workspace.package]` et héritée par chaque crate. `glam` pour les vecteurs (f32), `serde` pour la sérialisation, `thiserror` pour les erreurs.
 - **Pas de `panic!`, `unwrap()` ni `expect()` dans le code de bibliothèque.** Un panic en WASM tue l'onglet. Autorisés uniquement dans les tests et la CLI.
 - Toute erreur du DSL porte un `Span` (offset de début et de fin dans le texte source) pour être affichée dans l'éditeur.
@@ -142,6 +143,11 @@ Voir ROADMAP.md ; ne pas anticiper une épique ultérieure sans le demander.
 
 ## Façon de travailler
 
+- **Avant de commencer une fonctionnalité de la ROADMAP, rédiger ses user stories** et les faire relire avant tout code :
+  - Emplacement : `UserStories/Phase <n>/E<x>/<y>/` pour la fonctionnalité `E<x>.<y>` (ex. `UserStories/Phase 0/E0/2/` pour E0.2 ; les spikes suivent le même schéma : `UserStories/Phase 0/S1/1/`).
+  - Un fichier Markdown par US : `US-E<x>.<y>-<k>-<slug>.md` (`k` = 1, 2, 3… ; en général 1 à 3 US par fonctionnalité).
+  - Format : modèle et personas de la section « Rédiger les user stories » de `ROADMAP.md` (story utilisateur ou enabler technique, critères Étant donné / Quand / Alors, fixture, hors périmètre, dépendances).
+  - Passer la case de la fonctionnalité à `[~]` dans `ROADMAP.md` au démarrage.
 - Pour toute modification touchant plusieurs crates, proposer un plan avant d'écrire le code.
 - Pour le DSL : écrire d'abord le test (snapshot `insta` de l'AST ou du diagnostic attendu), puis l'implémentation.
 - Ajouter tout nouveau patron d'exemple dans `examples/` : il devient automatiquement un test de non-régression (parse + validation + invariants).

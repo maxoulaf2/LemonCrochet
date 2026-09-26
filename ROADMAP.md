@@ -2,7 +2,7 @@
 
 Feuille de route du visualiseur 3D de patrons d'amigurumi.
 
-Organisation : **phases** (jalons démontrables) → **épiques** (`E1`) → **fonctionnalités** (`E1.2`). Chaque fonctionnalité donne en général 1 à 3 user stories. Les identifiants sont stables : les US, branches et commits y font référence (`feat(dsl): E1.3 nested repeats`).
+Organisation : **phases** (jalons démontrables) → **épiques** (`E1`) → **fonctionnalités** (`E1.2`). Chaque fonctionnalité donne en général 1 à 3 user stories. Les identifiants sont stables : les US, branches et commits y font référence (`feat(dsl): E1.3 répétitions imbriquées`).
 
 Statut : `[ ]` à faire · `[~]` en cours · `[x]` terminé
 
@@ -15,7 +15,7 @@ Statut : `[ ]` à faire · `[~]` en cours · `[x]` terminé
 ### E0 — Socle technique
 
 - [x] **E0.1 Workspace Cargo** — Les six crates vides avec leurs dépendances orientées (`dsl` → `topology` → `solver` → `mesh` → `wasm`, plus `cli`). `clippy -D warnings` passe.
-- [ ] **E0.2 CI** — GitHub Actions : fmt, clippy, tests Rust, build `wasm-pack`, typecheck et tests du front. La CI bloque la fusion en cas d'échec.
+- [~] **E0.2 CI** — GitHub Actions : fmt, clippy, tests Rust, build `wasm-pack`, typecheck et tests du front. La CI bloque la fusion en cas d'échec.
 - [ ] **E0.3 Front minimal** — Vite, CodeMirror 6, scène Three.js vide. Module WASM chargé dans un Web Worker, aller-retour texte → résultat.
 - [ ] **E0.4 Harnais d'exemples** — Chaque fichier `examples/**/*.crochet` devient automatiquement un test (parse, validation, invariants au fur et à mesure qu'ils existent).
 - [ ] **E0.5 Docs initiales** — `docs/dsl.md` (grammaire cible V0) et `docs/model.md` (unités, constantes).
