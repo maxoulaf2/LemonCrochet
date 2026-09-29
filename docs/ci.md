@@ -6,7 +6,7 @@ Le workflow `.github/workflows/ci.yml` tourne sur chaque push vers `main` et sur
 |---|---|---|
 | `rust` | `cargo fmt --check`, `clippy -D warnings`, `cargo test` | oui |
 | `wasm` | `wasm-pack build`, puis publication de `web/src/wasm` comme artefact | oui |
-| `front` | `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm test` (ignoré tant que `web/package.json` n'existe pas) | non, il le deviendra avec E0.3 |
+| `front` | `pnpm install --frozen-lockfile`, `pnpm typecheck`, `pnpm test` (ignoré si `web/package.json` n'existe pas) | oui |
 
 ## Protection de la branche `main`
 
@@ -21,7 +21,7 @@ La fusion est bloquée tant que la CI n'est pas verte. Cette protection se règl
 3. Cocher les règles suivantes :
    - **Restrict deletions** et **Block force pushes** (cochées par défaut) ;
    - **Require a pull request before merging**, avec 0 approbation requise ;
-   - **Require status checks to pass**, puis *Add checks* : `rust` et `wasm` (source : GitHub Actions).
+   - **Require status checks to pass**, puis *Add checks* : `rust`, `wasm` et `front` (source : GitHub Actions).
 4. Cliquer sur **Create**.
 
 Les noms des checks correspondent au champ `name:` des jobs dans `ci.yml`. Si un job est renommé, il faut aussi mettre à jour le ruleset, sinon la PR restera bloquée en attendant un check qui ne viendra jamais.

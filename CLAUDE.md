@@ -47,6 +47,7 @@ cargo run -p crochet-cli -- validate examples/ours.crochet
 cargo run -p crochet-cli -- simulate examples/ours.crochet --out /tmp/ours.obj
 
 wasm-pack build crates/crochet-wasm --target web --out-dir ../../web/src/wasm
+corepack enable                          # une fois (droits admin sous Windows) ; sinon préfixer par `corepack pnpm`
 cd web && pnpm install && pnpm dev
 cd web && pnpm test && pnpm typecheck
 ```
