@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    // "Bundler": resolve imports the way Vite does (no file extensions required).
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
+    // Types for import.meta.env, `?worker` / `?url` imports, etc.
+    "types": ["vite/client"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    // Each file must be transpilable on its own (Vite compiles files one by one).
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    // Type-check only: Vite does the actual build.
+    "noEmit": true
+  },
+  "include": ["src"]
+}
