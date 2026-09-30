@@ -6,7 +6,8 @@
     "moduleResolution": "Bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
     // Types for import.meta.env, `?worker` / `?url` imports, etc.
-    "types": ["vite/client"],
+    // "node" is only there for tests that read files (e.g. loading the .wasm in Vitest).
+    "types": ["vite/client", "node"],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
