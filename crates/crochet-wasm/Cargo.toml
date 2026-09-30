@@ -13,3 +13,6 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 crochet-mesh = { path = "../crochet-mesh" }
 wasm-bindgen = "0.2.129"
+
+[dev-dependencies]
+test-case.workspace = true
